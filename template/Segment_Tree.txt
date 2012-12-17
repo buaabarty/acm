@@ -1,0 +1,99 @@
+class SegTree
+{
+public:
+    SegTree();
+    void Create(int start,int end);       //创建线段树
+    void Insert(int start,int end);        //插入线段
+    bool Delete(int start,int end);        //删除线段
+    int dim;                                         //区间线度，即当前所有区间并集的“长度”
+    int regs;                                        //独立区间个数
+    ~SegTree();
+private:
+    void Update();                            //插入、删除后更新数据
+    SegTree *left;                              //左子树
+    SegTree *right;                         //右子树
+    char lcov;                                   //是否覆盖左端点
+    char rcov;                                 //是否覆盖右端点
+    int lend;                                      //左端点
+    int rend;                                    //右端点
+    int count;                                  //覆盖区间线段数目
+};
+SegTree::SegTree()
+{
+    left=right=NULL;
+    lcov=rcov=0;
+    lend=rend=0;
+    count=0;
+    dim=regs=0;
+}
+void SegTree::Create(int start,int end)
+{
+    rend=end;
+    lend=start;
+    if(end-start>1)
+    {
+        int mid=(lend+rend)/2;
+        left=new SegTree();
+        right=new SegTree();
+        left->Create(start,mid);
+        right->Create(mid,end);
+    }
+}
+void SegTree::Insert(int start,int end)
+{
+    if(start<=lend&&end>=rend)count++;
+    else
+    {
+        int mid=(lend+rend)/2;
+        if(start<mid)left->Insert(start,end);
+        if(end>mid)right->Insert(start,end);
+    }
+    Update();
+}
+bool SegTree::Delete(int start,int end)
+{
+    if(start<=lend&&end>=rend)
+    {
+        if(count>0)count--;
+        else
+            return false;
+    }
+    else
+    {
+        int mid=(lend+rend)/2;
+        if(start<mid)if(!left->Delete(start,end))return false;
+        if(end>mid)if(!right->Delete(start,end))return false;
+    }
+    Update();
+    return true;
+}
+void SegTree::Update()
+{
+    if(count>0)                   //有线段覆盖这个区间
+    {
+        dim=rend-lend;
+        lcov=rcov=1;
+        regs=1;
+    }
+    else
+    {
+        if(rend-lend==1)       //叶节点且无覆盖
+        {
+            dim=0;
+            lcov=rcov=0;
+            regs=0;
+        }
+        else                            //内部节点且无覆盖
+        {
+            dim=left->dim+right->dim;
+            lcov=left->lcov;
+            rcov=right->rcov;
+            regs=left->regs+right->regs-left->rcov*right->lcov;           //若左子树覆盖了右端点且右子树覆盖了左端点则区间数-1
+        }
+    }
+}
+SegTree::~SegTree()
+{
+    if(left!=NULL)delete left;
+    if(right!=NULL)delete right;
+}

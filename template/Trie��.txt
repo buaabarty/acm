@@ -1,0 +1,23 @@
+int p[MAXN][26], d[MAXN];
+class Trie{
+public:
+    int size, cnt;
+    Trie(){
+        size = 1;
+        cnt = 0;
+        memset(p, 0, sizeof(p));
+        memset(d, 0, sizeof(d));
+    }
+    int insert(char str[])
+    {
+        int j = 1;
+        for (int i = 0; str[i] != '\0'; ++i)
+            if (p[j][str[i] - 'a']) j = p[j][str[i] - 'a'];
+            else{
+                p[j][str[i] - 'a'] = ++size;
+                j = size;
+            }
+        if (!d[j]) d[j] = ++cnt;
+        return d[j];
+    }
+}T;
