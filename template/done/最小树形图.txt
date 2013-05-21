@@ -1,0 +1,113 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#define N 1010
+#define INF 1000000000
+using namespace std;
+int g[N][N], id[N], pre[N], f[N], mincost[N];
+bool t[N];
+int s, l, r, n, m, ans,  X,  Y,  Z;
+void dfs(int v)
+{
+	s++;
+	t[v] = true;
+	for (int i = 1; i <= n; i++)
+		if (!t[i] && g[v][i] != -1) dfs(i);
+}
+void combine()
+{
+	int now, i, j, x, tmp;
+	memset(t, 0, sizeof(t));
+	for (i = l; i <= r; i++) t[f[i]] = true;
+	now = f[l];
+	for (i = l; i <= r; i++)
+	{
+		x = f[i];
+		ans += mincost[x];
+		id[x] = now;
+		for (j = 1; j <= n; j++)
+			if (!t[j] && id[j] == j)
+			{
+				if (g[j][x] != -1)
+				{
+					tmp = g[j][x]-mincost[x];
+					if (g[j][now] == -1 || tmp<g[j][now]) g[j][now] = tmp;
+				}
+				if ((g[x][j] != -1 && g[x][j]<g[now][j]) || g[now][j] == -1) g[now][j] = g[x][j];
+			}
+	}
+	for (i = 2; i <= n; i++)
+		if (id[i] == i) pre[i] = id[pre[i]];
+	mincost[now] = N;
+	for (i = 1; i <= n; i++)
+		if (id[i] == i && i != now && g[i][now] != -1 && g[i][now]<mincost[now])
+		{
+			mincost[now] = g[i][now];
+			pre[now] = i;
+		}
+}
+
+bool find_circle()
+{
+	int i, k;
+	int mark[N];
+	memset(t, 0, sizeof(t));
+	for (k = 2; k <= n; k++)
+		if (!t[k] && id[k] == k)
+		{
+			memset(mark, 0, sizeof(mark));
+			i = k;
+			r = 0;
+			while (i != 1 && !mark[i] && !t[i])
+			{
+				r++;
+				f[r] = i;
+				mark[i] = r;
+				t[i] = true;
+				i = pre[i];
+			}
+			if (mark[i])
+			{
+				l = mark[i];
+				return true;
+			}
+		}
+	return false;
+}
+
+void min_shuxingtu()
+{
+	while (find_circle()) combine();
+	for (int i = 2; i <= n; i++)
+		if (id[i] == i) ans += mincost[i];
+}
+int main()
+{
+	int i, j;
+	while(init())
+	{
+		memset(g, -1, sizeof(g));
+		//建图
+		memset(t, 0, sizeof(t));
+		s = 0;
+		dfs(1);
+		if (s<n) cout<<"poor XiaoA"<<endl; //无解情况
+		else
+		{
+			id[1] = 1;
+			for (i = 2; i <= n; i++) {
+				id[i] = i;
+				mincost[i] = INF;
+				for (j = 1; j <= n; j++)
+					if (j != i && g[j][i] != -1 && g[j][i]<mincost[i]) {
+						mincost[i] = g[j][i];
+						pre[i] = j;
+					}
+			}
+			ans = 0;
+			min_shuxingtu();
+			printf("%d\n", ans);
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,95 @@
+#include <cmath>
+#include <cstdio>
+#include <cfloat>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+const double INF = DBL_MAX;
+struct Node
+{
+	double x, y;
+	bool flag;//标记所在集合，两点在同一集合内不符合要求
+};
+Node pt[200005];
+int y_sort[200005];
+inline double sqr(double x)
+{
+    return x * x;
+}
+inline double Distance(Node &a, Node &b)
+{
+	if(a.flag != b.flag)
+        return sqrt(sqr(a.x - b.x) + sqr(a.y - b.y));
+	else return INF;
+}
+double min_n(double a, double b)
+{
+	if(a < b) return a;
+	else return b;
+}
+int x_cmp(const void *a, const void *b)
+{
+	if(((Node*)a)->x < ((Node*)b)->x) return -1;
+	else return 1;
+}
+int y_cmp(const void *a, const void *b)
+{
+	if(pt[(*(int*)a)].y < pt[(*(int*)b)].y) return -1;
+	else return 1;
+}
+double shortest_distance(int first,int last)
+{
+	if(last - first == 1) return Distance(pt[first], pt[last]);
+	else if(last - first == 2)
+        return min_n(min_n(Distance(pt[first], pt[first + 1]),
+                           Distance(pt[first], pt[first + 2])),
+                           Distance(pt[first + 1],pt[first + 2]));
+	int mid = (first + last) / 2;
+	double min_dist = min_n(shortest_distance(first, mid),
+                            shortest_distance(mid + 1,last));
+	if(min_dist == 0) return 0;
+	int y_end = 0;
+	for(int i = mid; pt[mid].x - pt[i].x < min_dist && i >= first; i--)
+	{
+		y_sort[y_end++] = i;
+	}
+	for(int i = mid + 1; pt[i].x - pt[mid + 1].x < min_dist && i <= last; i++)
+	{
+		y_sort[y_end++] = i;
+	}
+	qsort(y_sort, y_end, sizeof(y_sort[0]), y_cmp);
+	for(int i = 0;i < y_end; i++)
+	{
+		for(int j = i + 1; j < y_end && pt[y_sort[j]].y - pt[y_sort[i]].y < min_dist;j++)
+		{
+			min_dist = min_n(min_dist,
+                             Distance(pt[y_sort[i]], pt[y_sort[j]]));
+		}
+	}
+	return min_dist;
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n;
+		scanf("%d",&n);
+		for(int i = 0; i < n; i++)
+		{
+			scanf("%lf%lf", &pt[i].x, &pt[i].y);
+			pt[i].flag = false;
+		}
+		for(int i = n; i < 2*n; i++)
+		{
+			scanf("%lf%lf", &pt[i].x, &pt[i].y);
+			pt[i].flag = true;
+		}
+		//排序预处理
+		qsort(pt, 2 * n, sizeof(pt[0]), x_cmp);
+		//计算最近点对距离
+		printf("%.3f\n", shortest_distance(0, 2 * n - 1));
+	}
+	return 0;
+}

@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <limits.h>
+#define MAXN 100
+void merge_sort(int num[], int len)
+{
+    if (len <= 1) return;
+    int mid = len / 2;//left -> mid, mid + 1 -> right
+    int l1 = mid, l2 = len - mid, i;
+    int *a = (int*)malloc(sizeof(int) * l1 + 1);
+    int *b = (int*)malloc(sizeof(int) * l2 + 1);
+    for (i = 0; i < mid; ++i) a[i] = num[i];
+    for (i = mid; i < len; ++i) b[i - mid] = num[i];
+    merge_sort(a, l1);
+    merge_sort(b, l2);
+    a[l1] = INT_MAX;
+    b[l2] = INT_MAX;
+    int j, k;
+    i = j = k = 0;
+    for (k = 0; k < len; ++k)
+        if (a[i] < b[j]) num[k] = a[i++];
+        else num[k] = b[j++];
+    free(a);
+    free(b);
+}
+int main()
+{
+    int num[MAXN], n, i;
+    scanf("%d", &n);
+    for (i = 0; i < n; ++i)
+        scanf("%d", &num[i]);
+    merge_sort(num, n);
+    for (i = 0; i < n; ++i)
+        printf("%d ", num[i]); printf("\n");
+    return 0;
+}

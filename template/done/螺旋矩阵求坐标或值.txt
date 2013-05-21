@@ -1,0 +1,30 @@
+po getpos(LL n) {
+    if (n == 1) return po(0, 0);
+    LL k = 1;
+    while (n > sqr(2*k-1)) ++k;
+    k--;
+    LL now = sqr(2*k-1);
+    if (n <= now + 2 * k) {
+        return po(k, -k+n-now);
+    } else if (n <= now + 4 * k) {
+        return po(k-(n-now-2*k), k);
+    } else if (n <= now + 6 * k) {
+        return po(-k, k-(n-now-4*k));
+    } else {
+        return po(-k+n-now-6*k, -k);
+    }
+}
+LL getdat(po p) {
+    if (p.x==0&&p.y==0) return 1;
+    LL k = max(iabs(p.x), iabs(p.y));
+    LL now = sqr(2*k-1);
+    if (p.x==k&&p.y!=-k) {
+        return now + p.y+k;
+    } else if (p.y==k) {
+        return now + 2*k + k-p.x;
+    } else if (p.x==-k) {
+        return now + 4*k + k-p.y;
+    } else {
+        return now + 6*k + p.x+k;
+    }
+}

@@ -1,0 +1,46 @@
+int n, m;//n个节点连向m个节点，其中m个节点可以连多条边
+int dat[N][B];//邻接表
+int c[B];//m个节点的边容量
+vector<int> link[B];//m个节点的连接情况
+bool use[B];//m个节点的访问情况
+bool dfs(int v)
+{
+    for (int i = 1; i <= m; ++i)
+    {
+        int a = dat[v][i];
+        if (!use[a])
+        {
+            use[a] = true;
+            if (link[a].size() < c[a])
+            {
+                link[a].push_back(v);
+                return true;
+            }
+            else
+            {
+                for (int j = 0, k = link[a].size(); j < k; ++j)
+                {
+                    int u = link[a][j];
+                    if (dfs(u))
+                    {
+                        link[a][j] = v;
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+bool solve()
+{
+    for (int i = 1; i <= m; ++i)
+        link[i].clear();
+    int cnt = 0;
+    for (int i = 1; i <= n; ++i)
+    {
+        memset(use, false, sizeof(use));
+        if (dfs(i)) cnt++;
+    }
+    return cnt == n;
+}

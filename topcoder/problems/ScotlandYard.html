@@ -1,0 +1,111 @@
+<html><body bgcolor="#ffffff" text="#000000"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>Fox Ciel and Fox Jiro play a game called <i>Scotland Yard</i>.
+Their version of the game is a bit simplified, so if you know the original game, make sure you read the problem statement carefully.
+<br></br>
+<br></br>
+In the game Ciel and Jiro play, they use a map containing n cities.
+The cities are numbered 0 through n-1.
+The map also contains a bunch of arrows.
+Each arrow leads from one city to another (different) city, and has one of three possible colors.
+The colors represent three types of transportation: taxis, buses, and metro (subway).
+Both Ciel and Jiro know all information in this map.
+<br></br>
+<br></br>
+You are given three vector &lt;string&gt;s: <b>taxi</b>, <b>bus</b>, and <b>metro</b>.
+The j-th character of the i-th element of <b>taxi</b> is 'Y' if it is possible to travel directly from city i to city j using a taxi, or 'N' if that is not possible.
+In the same way, <b>bus</b> and <b>metro</b> encode the information about bus and subway travel.
+Note that all transportation options are one-way. Also note that there are no additional restrictions.
+(That is, it may be possible to travel between some pairs of cities in both directions, there may be more than one transportation option from city i to city j, and for each transport type there can be arbitrarily many options leaving a given city.)
+<br></br>
+<br></br>
+The game starts by Ciel secretly choosing one of the n cities as her initial location.
+The game then proceeds in turns.
+In each turn, first Ciel moves to an adjacent location, then Jiro has the option to announce her new location.
+More precisely, it looks as follows:
+Whenever it is Ciel's turn to move, she has to move from her current city X to some other city Y.
+If there are no transportation options that start in the city X, Ciel announces this and the game ends.
+Otherwise, she chooses one of the available options and moves to its destination.
+Additionally, Ciel announces to Jiro the type of the transportation system she used ("taxi", "bus", or "metro").
+Whenever it is Jiro's turn, if he is certain of Ciel's current city, he announces it and the game ends.
+Otherwise, Jiro passes and it's again Ciel's turn to move.
+(Note that Jiro can use all the information he has: the layout of the map, and the sequence of transportation systems Ciel already announced.)
+<br></br>
+<br></br>
+Ciel's score is the number of travels she made.
+Return Ciel's score, assuming that she plays optimally.
+If she can continue the game forever without being discovered by Jiro, return -1 instead.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>ScotlandYard</td></tr><tr><td>Method:</td><td>maxMoves</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;, vector &lt;string&gt;, vector &lt;string&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int maxMoves(vector &lt;string&gt; taxi, vector &lt;string&gt; bus, vector &lt;string&gt; metro)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Notes</h3></td></tr><tr><td align="center" valign="top">-</td><td>The answer will always fit into a signed 32bit integer.</td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>taxi</b> will contain between 2 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>taxi</b>, <b>bus</b>, and <b>metro</b> will contain the same number of elements.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>taxi</b>, <b>bus</b>, and <b>metro</b> will contain n characters, where n is the number of elements in <b>taxi</b>.</td></tr><tr><td align="center" valign="top">-</td><td>Each character in <b>taxi</b>, <b>bus</b>, and <b>metro</b> will be either 'Y' or 'N'.</td></tr><tr><td align="center" valign="top">-</td><td>The i-th character of the i-th element of <b>taxi</b>, <b>bus</b>, and <b>metro</b> will be 'N'.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NYN&quot;,
+ &quot;NNY&quot;,
+ &quot;NNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNN&quot;,
+ &quot;NNN&quot;,
+ &quot;NNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNN&quot;,
+ &quot;NNN&quot;,
+ &quot;NNN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2"><img src="http://www.topcoder.com/contest/problem/ScotlandYard/pic1.gif"></img><br></br>
+Ciel starts in city 0.
+In her first move, she announces "taxi" and moves from 0 to 1.
+At that moment, Jiro is not certain of her location: she can be in city 1 or in city 2.
+In her second move, Ciel announces "taxi" and moves from 1 to 2.
+Jiro announces that Ciel is in city 2 and the game ends.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NYY&quot;,
+ &quot;NNN&quot;,
+ &quot;NNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNN&quot;,
+ &quot;NNN&quot;,
+ &quot;NNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNN&quot;,
+ &quot;NNN&quot;,
+ &quot;NNN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1</pre></td></tr><tr><td><table><tr><td colspan="2"><img src="http://www.topcoder.com/contest/problem/ScotlandYard/pic2.gif"></img><br></br>
+After Ciel's first move, Jiro doesn't know her location. Still, the game ends, because Ciel has no more moves.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NYYY&quot;,
+ &quot;YNYY&quot;,
+ &quot;YYNY&quot;,
+ &quot;YYYN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNNN&quot;,
+ &quot;NNNN&quot;,
+ &quot;NNNN&quot;,
+ &quot;NNNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNNN&quot;,
+ &quot;NNNN&quot;,
+ &quot;NNNN&quot;,
+ &quot;NNNN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: -1</pre></td></tr><tr><td><table><tr><td colspan="2"><img src="http://www.topcoder.com/contest/problem/ScotlandYard/pic3.gif"></img><br></br>
+Ciel can use taxis to drive back and forth between the cities indefinitely. Jiro has no chance to discover her location.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NNY&quot;,
+ &quot;NNY&quot;,
+ &quot;NNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NYN&quot;,
+ &quot;NNY&quot;,
+ &quot;NNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNN&quot;,
+ &quot;NNN&quot;,
+ &quot;YNN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2"><img src="http://www.topcoder.com/contest/problem/ScotlandYard/pic4.gif"></img><br></br>
+Ciel starts by choosing her initial location and the first mode of transport.
+Here is how Jiro will think after Ciel's first move:
+<ul>
+<li>Suppose that Ciel announced "taxi". She could have started in city 0 or in city 1, but either way she would take the taxi to city 2. Thus, Jiro knows that Ciel is in city 2 and the game ends.</li>
+<li>Metro is even simpler. If Ciel announced she took the metro, she must have started in city 2 and then she took the metro to city 0. Jiro announces city 0 and the game ends.</li>
+<li>If Ciel announed that she took the bus, Jiro is not sure about her location: she can be either in city 1, or in city 2.</li>
+</ul>
+Regardless of where Ciel started and what she does in the second step after taking a bus in the first step, Jiro will always be able to determine her location and the game ends.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NNN&quot;,
+ &quot;YNY&quot;,
+ &quot;NNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNN&quot;,
+ &quot;YNN&quot;,
+ &quot;YNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNN&quot;,
+ &quot;NNN&quot;,
+ &quot;YYN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: -1</pre></td></tr><tr><td><table><tr><td colspan="2"><img src="http://www.topcoder.com/contest/problem/ScotlandYard/pic5.gif"></img><br></br>
+If Ciel travels back and forth between cities 1 and 2, Jiro will never catch her.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NNNNYNNNYY&quot;,
+ &quot;NNYNNYYYYY&quot;,
+ &quot;NNNNNNNNNN&quot;,
+ &quot;YYNNYYNNNY&quot;,
+ &quot;NNYNNNNNNN&quot;,
+ &quot;YNYNYNNNYN&quot;,
+ &quot;NNYNYNNNYN&quot;,
+ &quot;NNNNNNYNNN&quot;,
+ &quot;NNNNNNNNNN&quot;,
+ &quot;NNNNNNYNNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNYNNNYNNY&quot;,
+ &quot;YNYNNYYNYY&quot;,
+ &quot;NNNNNNNNNN&quot;,
+ &quot;YNYNNYNYNY&quot;,
+ &quot;NNYNNNNNYN&quot;,
+ &quot;YNYNYNYNYN&quot;,
+ &quot;NNYNNNNNNY&quot;,
+ &quot;YNYNNNNNNN&quot;,
+ &quot;NNNNNNNNNN&quot;,
+ &quot;NNYNYNNNNN&quot;}</pre></td></tr><tr><td><pre>{&quot;NNNNNNNYNN&quot;,
+ &quot;YNYNNNNNYN&quot;,
+ &quot;NNNNNNNNNN&quot;,
+ &quot;NYNNYNNNYY&quot;,
+ &quot;NNYNNNNNNN&quot;,
+ &quot;YNYNNNNNYY&quot;,
+ &quot;NNNNYNNNYN&quot;,
+ &quot;NNYNNNYNNN&quot;,
+ &quot;NNNNNNNNNY&quot;,
+ &quot;NNYNYNNNNN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 21</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

@@ -1,0 +1,27 @@
+bool vst[MAXN];
+int res[MAXN];
+void dfs(int deep)
+{
+    if (deep == n){
+        for (int i = 1; i <= n; ++i)
+            printf("%c", chr[res[i]]);
+        printf("\n");
+        return;
+    }
+    for (int i = 1; i <= n; ++i)
+        if (!rd[i] && !vst[i]){
+            for (int j = p[i]; j != -1; j = e[j].next)
+                --rd[e[j].v];
+            res[deep + 1] = i;
+            vst[i] = true;
+            dfs(deep + 1);
+            vst[i] = false;
+            for (int j = p[i]; j != -1; j = e[j].next)
+                ++rd[e[j].v];
+        }
+}
+void topsort()
+{
+    memset(vst, false, sizeof(vst));
+    dfs(0);
+}

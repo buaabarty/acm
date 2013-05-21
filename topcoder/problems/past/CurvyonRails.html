@@ -1,0 +1,60 @@
+<html><body bgcolor="#ffffff" text="#000000"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>Cat Carol is the queen of Gridland.
+Gridland is a rectangular country divided into a grid of unit square cells.
+Each cell contains either a town or a wasteland.
+Carol has decided to construct some railroad tracks according to the following rules:</p>
+<br></br>
+<ul>
+<li>The cells with wasteland must not contain any railroad tracks.</li>
+<li>Each town cell has to contain a single segment of railroad tracks that connects two of its four sides.</li>
+<li>Each segment of tracks has to be connected to two other segments of tracks (one on each end).</li>
+</ul>
+<br></br>
+<p>Note that Carol does not require the entire set of tracks to be connected.
+Configurations that consist of multiple disjoint loops are acceptable, too.</p>
+<br></br>
+<p>A Curvy is a curious animal indigenous to Gridland.
+These animals love curves and hate straight things.
+Some of the towns in Gridland are inhabited by Curvies.
+If such a town happens to contain a straight segment of tracks (i.e., a segment that connects two opposite sides of the cell), the Curvies in the town are very unhappy.</p>
+<br></br>
+<p>You are given a vector &lt;string&gt; <b>field</b> that describes Gridland:
+each character of each element of <b>field</b> describes one of its cells.
+The meaning of individual characters follows.</p>
+<br></br>
+<ul>
+<li>The character '.' represents a town without Curvies.</li>
+<li>The character 'C' represents a town with Curvies.</li>
+<li>The character 'w' represents a wasteland.</li>
+</ul>
+<br></br>
+<p>Compute and return the minimal number of towns with unhappy Curvies when the railroad tracks are constructed according to the above constraints.
+If there is no way to construct the railroads according to the given rules, return -1 instead.</p></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>CurvyonRails</td></tr><tr><td>Method:</td><td>getmin</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int getmin(vector &lt;string&gt; field)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>field</b> will contain between 1 and 25 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>field</b> will contain between 1 and 25 characters, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>field</b> will contain the same number of characters.</td></tr><tr><td align="center" valign="top">-</td><td>Each character of each element of <b>field</b> will be '.', 'w' or 'C'.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;..&quot;
+,&quot;..&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2">It is possible to construct a round railroad that passes through all towns.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;wCCww&quot;
+,&quot;wCC..&quot;
+,&quot;..w..&quot;
+,&quot;....w&quot;
+,&quot;ww..w&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2"><img src="http://www.topcoder.com/contest/problem/CurvyonRails/curvy0.png"></img> &nbsp; <img src="http://www.topcoder.com/contest/problem/CurvyonRails/curvy1.png"></img>
+<br></br>
+There are two valid ways to construct the railroads. In the left picture, there is one town with unhappy Curvies. In the right picture, there are no towns with unhappy Curvies.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;C.w&quot;
+,&quot;...&quot;
+,&quot;.C.&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1</pre></td></tr><tr><td><table><tr><td colspan="2">The curvy in the middle of the bottom row will be unhappy.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;.&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: -1</pre></td></tr><tr><td><table><tr><td colspan="2">There is no way to construct the railroads.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;w&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2">There is no town.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;CC..CCCw.CwC..CC.w.C&quot;,
+ &quot;C.CCCwCCC.w.w..C.w..&quot;,
+ &quot;wwww...CC.wC.Cw.CC..&quot;,
+ &quot;CC..CC.w..w.C..CCCC.&quot;,
+ &quot;CC.CCC..CwwCCC.wCC..&quot;,
+ &quot;w.C..wwCC.CC.wwwCC..&quot;,
+ &quot;.CC.CC..CCC..CC.CC.C&quot;,
+ &quot;Cw....C.C.CCC...CC..&quot;,
+ &quot;CC.C..Cww.C.CwwwC..w&quot;,
+ &quot;wCCww..C...CCCCCCC.w&quot;,
+ &quot;C.CCw.CC.ww...C.CCww&quot;,
+ &quot;C.C.C.CCwCC..wCCw.Cw&quot;,
+ &quot;CCC.C...w..C.wC.wCCw&quot;,
+ &quot;CC.C..C..CCC.CC.C...&quot;,
+ &quot;C.ww...CCC..CC...CCC&quot;,
+ &quot;...CCC.CwwwC..www.C.&quot;,
+ &quot;wwCCCCC.w.C.C...wCwC&quot;,
+ &quot;CCwC.CwCCC.C.w.Cw...&quot;,
+ &quot;C.w.wC.CC.CCC.C.w.Cw&quot;,
+ &quot;CCw.CCC..C..CC.CwCCw&quot;,
+ &quot;C.wwwww.CwwCCwwwwwww&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 9</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

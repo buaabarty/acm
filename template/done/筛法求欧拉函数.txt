@@ -1,0 +1,19 @@
+int phi[maxn];
+bool isp[maxn];
+int prime[maxn/10];
+void eulerfunc() {
+    memset(isp, 1, sizeof(isp));
+    phi[1] = 1;
+    for (LL i = 2, k = 0; i <= maxn; ++i) {
+        if (!phi[i]) {
+            phi[i] = i-1;
+            prime[k++] = i;
+        }
+        for (LL j = 0; j < k && i*prime[j]<=maxn; ++j)
+            if (i%prime[j]) phi[i*prime[j]] = phi[i]*(prime[j]-1);
+            else {
+                phi[i*prime[j]] = phi[i] * prime[j];
+                break;
+            }
+    }
+}

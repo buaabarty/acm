@@ -1,0 +1,51 @@
+<html><body bgcolor="#ffffff" text="#000000"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>Fox Ciel and Fox Jiro both went to spend an evening in the dancing room.
+Together, there are N foxes in the room.
+The foxes are numbered 0 through N-1.
+In particular, Ciel is fox 0 and Jiro is fox 1.
+<br></br>
+<br></br>
+<br></br>
+You are given a vector &lt;string&gt; <b>friendship</b> that describes the initial friendship between the foxes in the room.
+More precisely, <b>friendship</b> contains N elements with N characters each.
+Character j of element i of <b>friendship</b> is 'Y' if foxes i and j are friends at the beginning of the evening, and 'N' otherwise.
+Note that friendship is symmetric: whenever X is a friend of Y, Y is a friend of X.
+<br></br>
+<br></br>
+<br></br>
+During the evening, multiple songs will be played in succession.
+During each song, some pairs of foxes will be dancing together.
+Foxes are not allowed to change partners during the dance.
+Thus in each dance each fox either dances with a single partner, or sits the dance out.
+<br></br>
+<br></br>
+<br></br>
+Foxes are not allowed to form the pairs for a dance arbitrarily.
+It is only allowed for two foxes to dance together if they are friends, or if they have a common friend who can introduce them.
+That is, if foxes A and B are not friends at the moment, they can only dance together if there is a fox C such that A and B are both friends with C.
+After two foxes dance together, they become friends.
+<br></br>
+<br></br>
+<br></br>
+Fox Ciel wants to become friends with Fox Jiro.
+Return the smallest number of dances in which this can be achieved (assuming that all other foxes cooperate and form pairs for the dances optimally).
+If it's impossible to make Ciel and Jiro friends, return -1 instead.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>DancingFoxes</td></tr><tr><td>Method:</td><td>minimalDays</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int minimalDays(vector &lt;string&gt; friendship)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Notes</h3></td></tr><tr><td align="center" valign="top">-</td><td>Gender does not matter for the foxes when choosing their dance partners.</td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td>N will be between 2 and 50, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>friendship</b> will contain exactly N elements.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>friendship</b> will contain exactly N characters.</td></tr><tr><td align="center" valign="top">-</td><td>Each character in <b>friendship</b> will be 'Y' or 'N'.</td></tr><tr><td align="center" valign="top">-</td><td>For each i, <b>friendship</b>[i][i] = 'N'.</td></tr><tr><td align="center" valign="top">-</td><td>For each i and j, <b>friendship</b>[i][j] = <b>friendship</b>[j][i].</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NNY&quot;,
+ &quot;NNY&quot;,
+ &quot;YYN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1</pre></td></tr><tr><td><table><tr><td colspan="2">There are 3 foxes. Ciel and Jiro are not friends, but they are both friends with fox 2. Thus, they may dance together in the first dance and become friends.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NNNNN&quot;,
+ &quot;NNYYY&quot;,
+ &quot;NYNYY&quot;,
+ &quot;NYYNY&quot;,
+ &quot;NYYYN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: -1</pre></td></tr><tr><td><table><tr><td colspan="2">Ciel does not know any other fox at the dance, so she cannot dance with anybody.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NNYYNN&quot;,
+ &quot;NNNNYY&quot;,
+ &quot;YNNNYN&quot;,
+ &quot;YNNNNY&quot;,
+ &quot;NYYNNN&quot;,
+ &quot;NYNYNN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NNYNNNNYN&quot;,
+ &quot;NNNNYNYNN&quot;,
+ &quot;YNNYNYNNN&quot;,
+ &quot;NNYNYNYYN&quot;,
+ &quot;NYNYNNNNY&quot;,
+ &quot;NNYNNNYNN&quot;,
+ &quot;NYNYNYNNN&quot;,
+ &quot;YNNYNNNNY&quot;,
+ &quot;NNNNYNNYN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 3</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;NY&quot;,
+ &quot;YN&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2">Ciel and Jiro are already friends in the beginning, no dances are needed. In such a case, the correct return value is 0.</td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

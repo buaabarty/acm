@@ -1,0 +1,68 @@
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+using namespace std;
+#define N 110
+typedef long long lld;
+void extgcd(int a, int b, int & x, int & y)
+{
+	if (b == 0) { x = 1; y = 0; return; }
+	extgcd(b, a % b, x, y);
+	int t = x; x = y; y = t - a / b * y;
+	return;
+}
+lld catalan_sum(int n, int m)
+{
+    int sm[N],sa[N];
+    lld sum, res;
+	int k = m, p = 0;
+	n -= 2;
+	sum = res = 1LL;
+	p = 0;
+	for (int i = 2; i * i <= k; i++)
+  		if(k % i == 0)
+  		{
+            sm[p++] = i;
+			do
+			{
+				k /= i;
+			}while (k % i == 0);
+        }
+    if (k > 1) sm[p++] = k;
+    memset(sa, 0, sizeof(sa));
+    for (int i = 2; i <= n; i++)
+    {
+        int t = 4 * i - 2;
+        for (int j = 0; j < p; j++)
+        {
+            while (t % sm[j] == 0)
+            {
+                sa[j]++;
+                t /= sm[j];
+            }
+        }
+	    res = res * t % m;
+        t = i + 1;
+        for (int j = 0; j < p; j++)
+        {
+         	while (t % sm[j] == 0)
+         	{
+                sa[j]--;
+                t /= sm[j];
+           	}
+        }
+        if(t > 1)
+        {
+         	int x, y;
+           	extgcd(t, m, x, y);
+           	x = (x % m + m) % m;
+           	res = (res * x) % m;
+        }
+        lld fin = res;
+        for(int j = 0; j < p; j++)
+        	for(int k = 0; k < sa[j]; k++)
+        		fin = (fin * sm[j]) % m;
+        sum = (sum + fin) % m;
+    }
+    return sum;
+}

@@ -1,0 +1,110 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <queue>
+#define LL long long
+#define N 200000
+#define S 512
+#define M 1000000
+using namespace std;
+struct edge{
+    LL v, d, next;
+}e[M];
+LL p[N], eid;
+void mapinit()
+{
+    memset(p, -1, sizeof(p));
+    eid = 0;
+}
+void insert1(LL x, LL y, LL d)
+{
+    e[eid].v = y;
+    e[eid].d = d;
+    e[eid].next = p[x];
+    p[x] = eid++;
+}
+void insert2(LL x, LL y, LL d)
+{
+    insert1(x, y, d);
+    insert1(y, x, d);
+}
+LL dat[S][S];
+LL s;
+inline LL pos(LL x, LL y)
+{
+    return (x - 1) * (s - 1) + y;
+}
+bool use[N];
+LL d[N], n;
+struct node{
+    LL v, d;
+    friend bool operator < (node n1, node n2)
+    {
+        return n1.d > n2.d;
+    }
+    node(LL a, LL b)
+    {
+        v = a, d = b;
+    }
+};
+priority_queue<node> q;
+LL dijkstra(LL begin, LL dest)
+{
+    memset(use, false, sizeof(use));
+    memset(d, 0x7f, sizeof(d));
+    while (!q.empty()) q.pop();
+    d[begin] = 0;
+    q.push(node(begin, 0));
+    for (LL i = 1; i <= n; ++i)
+    {
+        LL v = q.top().v, s = q.top().d;
+        while (use[v])
+        {
+            q.pop();
+            v = q.top().v, s = q.top().d;
+        }
+        q.pop();
+        use[v] = true;
+        for (LL j = p[v]; j != -1; j = e[j].next)
+            if (d[e[j].v] > s + e[j].d && !use[e[j].v])
+            {
+                q.push(node(e[j].v, s + e[j].d));
+                d[e[j].v] = s + e[j].d;
+            }
+    }
+    return d[dest];
+}
+LL st, ed;
+void init()
+{
+    mapinit();
+    scanf("%I64d", &s);
+    for (LL i = 1; i <= s; ++i)
+        for (LL j = 1; j <= s; ++j)
+            scanf("%I64d", &dat[i][j]);
+    st = (s - 1) * (s - 1) + 1;
+    ed = st + 1;
+    for (LL i = 1; i < s; ++i)
+        for (LL j = 1; j < s; ++j)
+        {
+            if (i == 1) insert2(st, pos(i, j), dat[i][j]);
+            if (j == s - 1) insert2(st, pos(i, j), dat[i][j + 1]);
+            if (j == 1) insert2(pos(i, j), ed, dat[i][j]);
+            if (i == s - 1) insert2(pos(i, j), ed, dat[i + 1][j]);
+            if (j < s - 1) insert2(pos(i, j), pos(i, j + 1), dat[i][j + 1]);
+            if (i < s - 1) insert2(pos(i, j), pos(i + 1, j), dat[i + 1][j]);
+        }
+    n = (s - 1) * (s - 1) + 2;
+}
+int main()
+{
+    int T;
+    scanf("%d", &T);
+    while (T--)
+    {
+        init();
+        printf("%I64d\n", dijkstra(st, ed));
+    }
+    return 0;
+}

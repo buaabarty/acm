@@ -1,0 +1,42 @@
+<html><body bgcolor="#ffffff" text="#000000"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>You are on vacation on a tropical island, but you couldn't resist the temptation of solving a good old problem. It all started when a group of kids played a game they call &quot;The Falling Coconuts&quot;. In this game, a number of coconuts fall to the ground, one by one, on a single axis, at the locations given in <b>drops</b>. If a coconut X lands on the ground, it remains where it is.  If it lands on top of another coconut Y, one of the following things happens: <br></br><br></br>
+
+- If coconut Y is surrounded on both sides by coconuts (denoted by 'O'), coconut X remains where it is. 
+
+<pre>
+     X
+    OYO
+</pre>
+
+- If there is no coconut directly to the right of coconut Y, coconut X slides down to the position directly to the right of coconut Y.
+
+<pre>
+     X
+    OY   -&gt;  OYX
+</pre>
+<pre>
+     X
+     Y   -&gt;   YX
+</pre>
+- If there is a coconut directly to the right of coconut Y, but no coconut directly to the left of coconut Y, coconut X slides down to the position directly to the left of coconut Y.
+<pre>
+     X
+     YO  -&gt;  XYO
+</pre>
+<br></br>
+Each time coconut X slides down to a different position, it will continue to slide (following the behavior outlined above) until it's in a place where it will not slide any further.
+
+<br></br><br></br>
+The task is to return the final coconut configuration in a String[]. Each element represents a single row in the final configuration.  The first element represents the lowest row and the last element represents the highest row.  Within each element, coconuts are represented by the uppercase letter 'O', and empty space is represented by '-'.  The first and last characters of the first element of the String[] must both be 'O', and the rest of the elements must have exactly the same number of characters as the first.  Each element included in the String[] must contain at least one 'O' character.
+</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>FallingCoconuts</td></tr><tr><td>Method:</td><td>harvest</td></tr><tr><td>Parameters:</td><td>vector &lt;int&gt;</td></tr><tr><td>Returns:</td><td>vector &lt;string&gt;</td></tr><tr><td>Method signature:</td><td>vector &lt;string&gt; harvest(vector &lt;int&gt; drops)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b> drops </b> will contain between 1 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b> drops </b> will be between 0 and 20, inclusive.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{8, 9, 10, 11, 12, 8, 12, 10}</pre></td></tr></table></td></tr><tr><td><pre>Returns: {&quot;OOOOOOO&quot;, &quot;---O---&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2">The configuration after each fallen coconut is given below:
+<pre>                                                                         X
+X  -&gt;  OX  -&gt;  OOX  -&gt;  000X  -&gt;  0000X  -&gt;  X00000  -&gt;  000000X  -&gt;  0000000
+</pre>
+In this diagram, 'X' denotes the last fallen coconut.
+</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{5, 20, 5, 20, 5, 6, 7}</pre></td></tr></table></td></tr><tr><td><pre>Returns: {&quot;OOOOO-----------OO&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{6, 8, 10, 7, 9, 8, 8, 8, 8, 8}</pre></td></tr></table></td></tr><tr><td><pre>Returns: {&quot;OOOOOO&quot;, &quot;-OOO--&quot;, &quot;--O---&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{0, 0, 0, 0}</pre></td></tr></table></td></tr><tr><td><pre>Returns: {&quot;OOO&quot;, &quot;-O-&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2">One of the coconuts will end up at a location with a negative index.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 
+5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{&quot;OOOOOOOOOOOO&quot;,
+ &quot;-OOOOOOOOOO-&quot;,
+ &quot;--OOOOOOOO--&quot;,
+ &quot;---OOOOOO---&quot;,
+ &quot;----OOOO----&quot;,
+ &quot;-----OO-----&quot; }</pre></td></tr><tr><td></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

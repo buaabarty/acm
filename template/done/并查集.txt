@@ -1,0 +1,11 @@
+int fa[MAXN], s[MAXN];
+int father(int v)
+{
+    if (fa[v] != v)
+    {
+        int temp = father(fa[v]);
+        s[v] ^= s[fa[v]];
+        fa[v] = temp;
+    }
+    return fa[v];
+}

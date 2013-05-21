@@ -1,0 +1,36 @@
+//用边表存储
+bool inq[MAXN], vst[MAXN];
+int cnt[MAXN];
+double d[MAXN];//从v到i的最短路长度
+bool spfa(int v)//有负环返回true,否则返回false
+{
+    memset(cnt, 0, sizeof(cnt));
+    memset(inq, false, sizeof(inq));
+    for (int i = 1; i <= n; ++i)
+        d[i] = 1e20;
+    cnt[v] = 1;
+    inq[v] = true;
+    queue<int> q;
+    q.push(v);
+    d[v] = 0;
+    while (!q.empty())
+    {
+        int x = q.front();
+        vst[x] = true;
+        for (int i = p[x]; i != -1; i = e[i].next)
+            if (d[x] + e[i].d < d[e[i].v])
+            {
+                d[e[i].v] = d[x] + e[i].d;
+                if (!inq[e[i].v])
+                {
+                    inq[e[i].v] = true;
+                    q.push(e[i].v);
+                    cnt[e[i].v]++;
+                    if (cnt[e[i].v] > n) return true;//有负环则返回true
+                }
+            }
+        inq[x] = false;
+        q.pop();
+    }
+    return false;//无负环返回false
+}
