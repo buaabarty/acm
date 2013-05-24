@@ -2,8 +2,7 @@
 // 
 //       Filename:  242.cc
 // 
-//    Description:  最大流，源点连向每个人容量为1，每个人连向每个课容量为1，每个课连向
-//    汇点容量为2，输出方案
+//    Description:  最大流，dinic算法
 // 
 //        Version:  1.0
 //        Created:  2013年05月24日 14时45分09秒
