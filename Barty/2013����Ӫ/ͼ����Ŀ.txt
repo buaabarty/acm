@@ -1,0 +1,140 @@
+1062* 昂贵的聘礼 枚举等级限制+dijkstra
+1087* A Plug for UNIX 2分匹配
+1094 Sorting It All Out floyd 或 拓扑
+1112* Team Them Up! 2分图染色+DP
+1122 FDNY to the Rescue! 最短路
+1125 Stockbroker Grapevine FLOYD
+1128 Frame Stacking 拓扑排序
+1135 Domino Effect 最短路 
+1149* PIGS 网络流
+1161* Walls Floyd
+1192 最优连通子集
+1201 Intervals 差分约束
+1236* Network of Schools 强联通
+1251 Jungle Roads MST
+1258 Agri-Net MST
+1270 Following Orders 拓扑排序
+1273 Drainage Ditches 最大流
+1274 The Perfect Stall 2分匹配
+1275* Cashier Employment 差分约束
+1287 Networking MST
+1300 Door Man 欧拉路
+1324 Holedox Moving BFS
+1325 Machine Schedule 2分匹配(最小点覆盖)
+1364 King 差分约束
+1386 Play on Words 欧拉路
+1422 Air Raid 2分匹配
+1459 Power Network 网络流
+1466 Girls and Boys 2分图(最大独立团)
+1469 COURSES 2分匹配
+1502 MPI Maelstrom floyd
+1511* Invitation Cards 最短路
+1556 The Doors 最短路
+1562 Oil Deposits DFS
+1603 Risk 最短路
+1613 Cave Raider 最短路
+1637* Sightseeing tour 混合图欧拉回路-网络流
+1659 Frogs’ Neighborhood Havel-Hakimi定理
+1679 The Unique MST MST唯一性
+1716 Integer Intervals 差分约束
+1724* ROADS 最短路-拆点
+1751 Highways MST
+1780* Code 欧拉回路
+1789 Truck History MST
+1797 Heavy Transportation 最小生成树
+1847 Tram 最短路
+1861 Network MST
+1904* King's Quest 强联通
+1949 Chores 最短路
+1979 Red and Black DFS
+2031 Building a Space Station MST
+2060 Taxi Cab Scheme 2分匹配
+2075 Tangled in Cables 最小生成树
+2112 Optimal Milking 网络流
+2125 Destroying The Graph 最小割
+2135 Farm Tour 费用流
+2139 Six Degrees of Cowvin Bacon floyd
+2226 Muddy Fields 2分匹配
+2230 Watchcow 欧拉回路
+2239 Selecting Courses 2分匹配
+2240 Arbitrage 最短路
+2253 Frogger 最短路
+2263 Heavy Cargo 最短路
+2267* From Dusk till Dawn or: Vladimir the Vampire 最短路
+2289 Jamie's Contact Groups 网络流
+2337 Catenyms 欧拉通路
+2349 Arctic Network 最小生成树
+2367 Genealogical tree 拓扑排序
+2387 Til the Cows Come Home 最短路
+2391* Ombrophobic Bovines 最大流
+2394 Checking an Alibi 最短路
+2396* Budget 网络流
+2421* Constructing Roads 最小生成树
+2446 Chessboard 2分匹配
+2455 Secret Milking Machine 网络流
+2457 Part Acquisition 最短路
+2472 106 miles to Chicago 最短路
+2485 Highways 最小生成树
+2513 Colored Sticks 欧拉路
+2516 Minimum Cost 费用流
+2536 Gopher II 2分匹配
+2553* The Bottom of a Graph 强联通
+2570 Fiber Network 最短路
+2584 T-Shirt Gumbo 网络流
+2585 Window Pains 拓扑排序
+2594* Treasure Exploration 2分匹配
+2607 FireStation 最短路
+2723 Get Luffy Out 2-sat
+2724 Purifying Machine 2分匹配
+2728 Desert King 最优比例生成树
+2749* Building roads 2-sat
+2762 Going from u to v or from v to u? 强联通
+2935 Basic Wall Maze BFS
+2942 Knights of the Round Table 点双连通分量+二分图判定
+2949* Word Rings 差分约束
+2983 Is the Information Reliable? 差分约束
+2987 Firing 最小割(求解正确性??)
+3020 Antenna Placement 2分匹配
+3026 Borg Maze MST
+3041 Asteroids 2分匹配
+3072* Robot 最短路
+3159 Steady Cow Assignment差分约束
+3160 Father Christmas flymouse 强联通
+3164 Command Network 最小树形图
+3169 Layout 差分约束
+3177 Redundant Paths 双联通分量
+3189 Steady Cow Assignment 网络流
+3204 Ikki's Story I - Road Reconstruction 最大流
+3207 Ikki's Story IV - Panda's Trick 2sat
+3216 Repairing Company 2分匹配
+3228 Gold Transportation 网络流
+3255 Roadblocks 最短路
+3259 Wormholes 最短路
+3268 Silver Cow Party 最短路
+3275 Ranking the Cows floyd
+3281 Dining 最大流
+3308 Paratroopers 最小割
+3310 Caterpillar
+3311 Hie with the Pie floyd
+3328 Cliff Climbing 最短路
+3343 Against Mammoths 2分匹配
+3352 Road Construction 桥
+3439 Server Relocation 最短路
+3463 Sightseeing 最短路
+3469 Dual Core CPU 最小割
+3487 The Stable Marriage Problem 稳定婚姻
+3522 Slim Span 最小生成树
+3565 Ants 二分图/费用流
+3594 Escort of Dr. Who How 最短路
+3615 Cow Hurdles 最短路
+3621 Sightseeing Cows 二分枚举+判负环
+3648 Wedding 2-sat
+3653 Here We Go(relians) Again 最短路
+3659* Cell Phone Network 最小支配集
+3660 Cow Contest 拓扑排序
+3662* Telephone Lines 最短路
+3678 Katu Puzzle 2-sat
+3683* Priest John's Busiest Day 2-sat求解
+3687 Labeling Balls 差分约束 或 拓扑排序
+3692 Kindergarten 2分匹配
+3694 Network 无向图缩点

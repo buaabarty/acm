@@ -1,0 +1,6 @@
+LL mul(LL lhs, LL rhs){//²¼Ë¹³Ë·¨
+    LL sq = 100000;
+    LL lhs1 = lhs % sq;
+    LL rhs1 = rhs % sq;
+    return ((lhs / sq * rhs1 + rhs / sq * lhs1) * sq + lhs1 * rhs1) % module;
+}

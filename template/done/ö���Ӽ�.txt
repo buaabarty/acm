@@ -1,0 +1,9 @@
+for (int i = 1; i < p2[n]; ++i) {
+            int x = s[(p2[n]-1)^i], y, z;
+            if (x > s[i]) continue;
+            for (int j = i&(i-1); j; j = (j - 1) & i) {
+                y = s[j], z = s[j^i];
+                if (z >= y && y >= x && x + y > z)
+                    mm.insert(make_pair(x, y));
+            }
+        }

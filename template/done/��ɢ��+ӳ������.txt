@@ -1,0 +1,64 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <set>
+#include <algorithm>
+#define maxn 200010
+#define PII pair<int, int>
+#define mpp make_pair
+#define inf 1000000000
+using namespace std;
+int tsize, table[maxn*2];
+void init_table() {
+    sort(table, table+tsize);
+    tsize = unique(table, table+tsize)-table;
+}
+
+int get_index(int key) {
+    return lower_bound(table, table+tsize, key)-table;
+}
+
+int n, m, a[maxn*2];
+int pos[maxn*2], next[maxn*2];
+bool inset[maxn*2];
+int main() {
+    while (scanf("%d%d", &n, &m) == 2) {
+        tsize = 0;
+        for (int i = 1; i <= n; ++i) {
+            scanf("%d", &a[i]);
+            table[tsize++] = a[i];
+        }
+        for (int i = 1; i <= m; ++i) table[tsize++] = i;
+        init_table();
+        for (int i = 1; i <= n; ++i) a[i] = get_index(a[i]);
+        for (int i = 0; i < tsize; ++i) {
+            pos[i] = inf;
+            inset[i] = 0;
+        }
+        for (int i = n; i >= 1; --i) {
+            next[i] = pos[a[i]];
+            pos[a[i]] = i;
+        }
+        m = min(m, tsize);
+        set< PII, greater< PII > > s;
+        for (int i = 0; i < m; ++i) {
+            s.insert(mpp(pos[i], i));
+            inset[i] = true;
+        }
+        int ans = 0;
+        for (int i = 1; i <= n; ++i) {
+            if (inset[a[i]]) {
+                s.erase(mpp(i, a[i]));
+                s.insert(mpp(next[i], a[i]));
+            } else {
+                ans++;
+                inset[a[i]] = 1;
+                s.insert(mpp(next[i], a[i]));
+                inset[(*s.begin()).second] = 0;
+                s.erase(*s.begin());
+            }
+        }
+        printf("%d\n", ans);
+    }
+    return 0;
+}

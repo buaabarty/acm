@@ -1,0 +1,31 @@
+int n;
+vector<int> map[MAX_N];
+bool use[MAX_N];
+int match[MAX_N];
+bool hungary(int v)
+{
+    for (int i = 0, l = map[v].size(); i < l; i++)
+    {
+        int u = map[v][i];
+        if (!use[u])
+        {
+            use[u] = true;
+            int temp = match[u];
+            match[u] = v;
+            if (temp == 0 || hungary(temp)) return true;
+            match[u] = temp;
+        }
+    }
+    return false;
+}
+int calc()
+{
+    memset(match, 0, sizeof(match));
+    int cnt = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        memset(use, false, sizeof(use));
+        if (hungary(i)) cnt++;
+    }
+    return cnt;
+}
