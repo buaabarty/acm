@@ -1,0 +1,37 @@
+// =====================================================================================
+// 
+//       Filename:  b.cc
+// 
+//    Description:  
+// 
+//        Version:  1.0
+//        Created:  2013年06月02日 00时26分03秒
+//       Revision:  none
+//       Compiler:  g++
+// 
+//         Author:  Boyang Yang (barty), maiL@barty.ws
+//        Company:  http://barty.ws
+// 
+// =====================================================================================
+
+
+#include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <set>
+#include <map>
+#include <cstdio>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <cstring>
+using namespace std;
+template <typename T> void checkMin(T &a, const T &b) { if (b < a) a = b; }
+template <typename T> void checkMax(T &a, const T &b) { if (b > a) a = b; }
+
+int main (int argc, char *argv[]) {
+    return 0;
+}
