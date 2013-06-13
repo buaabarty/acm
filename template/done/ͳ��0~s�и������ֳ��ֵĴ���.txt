@@ -1,0 +1,29 @@
+void solve(long long s, long long ans[]){
+    int i, j, k;
+    if (s < 0) return;
+    long long rgt = 0, id = 1;
+    ans[0] += 1;
+    while (s > 0)
+    {
+        int now = s % 10;
+        s /= 10;
+        for (i = 0; i < 10; i++)
+        {
+            if (now > i)
+            {
+                ans[i] += s * id;
+                if (i) ans[i] += id;
+            }
+            else if (now == i)
+            {
+                if (s && i == 0)
+                    ans[i] += (s - 1) * id + rgt + 1;
+                else if (i > 0)
+                    ans[i] += s * id + rgt + 1;
+            }
+            else if (now < i) ans[i] += s * id;
+        }
+        rgt += now * id;
+        id *= 10;
+    }
+}

@@ -1,0 +1,1 @@
+GCD对称行列式的值：D=phi(x1)*phi(x2)*...*phi(xn),phi为欧拉函数
