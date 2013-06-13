@@ -1,0 +1,80 @@
+// =====================================================================================
+// 
+//       Filename:  f1.cc
+// 
+//    Description:  implement
+// 
+//        Version:  1.0
+//        Created:  2013年06月13日 00时04分54秒
+//       Revision:  none
+//       Compiler:  g++
+// 
+//         Author:  Boyang Yang (barty), maiL@barty.ws
+//        Company:  http://barty.ws
+// 
+// =====================================================================================
+
+
+#include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <set>
+#include <map>
+#include <cstdio>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <cstring>
+using namespace std;
+template <typename T> void checkMin(T &a, const T &b) { if (b < a) a = b; }
+template <typename T> void checkMax(T &a, const T &b) { if (b > a) a = b; }
+
+const int N = 1600 + 9;
+
+int mat[N][N], nmat[N][N];
+int vst[N][N];
+int n, m;
+int step[4][2] = {{0, 1}, {0, -1}, {-1, 0} ,{1, 0}};
+
+int sx, sy, cnt;
+
+void dfs(int x, int y, int c) {
+    vst[x][y] = c;
+    sx += x;
+    sy += y;
+    ++cnt;
+    for (int k = 0; k < 4; ++k) {
+        int dx = x + step[k][0], dy = y + step[k][1];
+        if (dx < 1 || dy < 1 || dx > n || dy > m) {
+            continue;
+        }
+        if (!vst[dx][dy]) dfs(dx, dy, c);
+    }
+}
+
+int main (int argc, char *argv[]) {
+    freopen("01.in.txt", "r", stdin);
+    scanf("%d%d", &n, &m);
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= m; ++j)
+            scanf("%d", &mat[i][j]);
+    memset(vst, 0, sizeof(vst));
+    int tot = 0;
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= m; ++j)
+            if (!vst[i][j] && mat[i][j]) {
+                ++tot;
+                sx = 0, sy = 0, cnt = 0;
+                dfs(i, j, tot);
+                double gx = sx * 1.0 / (double)cnt;
+                double gy = sy * 1.0 / (double)cnt;
+                memset(nmat, 0, sizeof(nmat));
+                for (int x = 1; x <= n; ++x)
+                    for (int y = 1; y <= m; ++y)
+                        if (vst[x][y] == tot && dist(x, y, gx, gy)) 
+            }
+    return 0;
+}
