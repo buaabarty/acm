@@ -1,0 +1,39 @@
+<html><body bgcolor="#ffffff" text="#000000"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>Manao is playing a new board game. The game is played on an NxM board with each cell initially colored either black or white. The cell on the intersection of the i-th (0-based) row and j-th (0-based) column is referred to as (i, j).
+<br></br><br></br>
+Manao may perform two types of moves:
+<ol>
+<li>Pick a cell (i, j) (0 &le; i &lt; N, 0 &le; j &lt; M) and toggle the color of cells (i-1, j), (i+1, j), (i, j-1), (i, j+1). If some of these cells are outside the board, the move is considered valid, and the cells outside of the board are ignored.</li>
+<li>Pick a cell (i, j) (0 &le; i &lt; N, 0 &le; j &lt; M) and toggle the color of cells (i, j), (i-1, j), (i+1, j), (i, j-1), (i, j+1). Again, the cells outside of the board, if any, are ignored.</li>
+</ol>
+We call the two move types "type 1 moves" and "type 2 moves". In both cases, we say that Manao performed the move on the cell (i, j).
+<br></br><br></br>
+Manao cannot perform the moves arbitrarily, he has to follow some additional constraints:
+For each row, all moves applied to cells in the row have to be of the same type.
+Also, for each column, all moves applied to cells in the column have to be of the same type.
+In particular, Manao is not allowed to perform a type 1 move on a cell and then a type 2 move on the same cell (nor vice versa).
+<br></br><br></br>
+You are given a vector &lt;string&gt; <b>board</b> consisting of N elements, each M characters long. The j-th character in the i-th row (0-based indices) of <b>board</b> is 'W' if cell (i, j) is initially white, and 'B' otherwise. Manao wants to turn the board all black. Determine the minimum number of moves he needs to perform to accomplish this task. If it is impossible to turn every cell on the board black, return -1.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>YetAnotherBoardGame</td></tr><tr><td>Method:</td><td>minimumMoves</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int minimumMoves(vector &lt;string&gt; board)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td>&#160;&#160;&#160;&#160;</td></tr><tr><td></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>board</b> will contain between 1 and 13 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>board</b> will be between 1 and 13 characters long, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>The elements of <b>board</b> will be of the same length.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>board</b> will consist of 'W' and 'B' characters only.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BBBBBBBBB&quot;,
+ &quot;BBWBBBBBB&quot;,
+ &quot;BWWWBBBBB&quot;,
+ &quot;BBWBBBWBB&quot;,
+ &quot;BBBBBWBWB&quot;,
+ &quot;BBBBBBWBB&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2">A type 1 move on (4, 6) and a type 2 move on (2, 2) turn the whole board black.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BBW&quot;,
+ &quot;WWW&quot;,
+ &quot;BWW&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2">Manao can perform a move of type 2 on cell (1, 2) and a move of type 1 on cell (2, 0).</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;WBW&quot;,
+ &quot;BBW&quot;,
+ &quot;WBW&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 4</pre></td></tr><tr><td><table><tr><td colspan="2">If no additional constraints were imposed, Manao would perform a type 1 move on (1, 0) and a type 2 move on (1, 2). However, these cells are in the same row and thus these moves are incompatible. Instead, Manao can perform four type 2 moves on cells (1, 0), (1, 1), (0, 2) and (2, 2).</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BBBB&quot;,
+ &quot;WBWB&quot;,
+ &quot;BBBB&quot;,
+ &quot;BBBB&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: -1</pre></td></tr><tr><td><table><tr><td colspan="2">There is no way to turn this board black.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;WWWWWBW&quot;,
+ &quot;WBWBWBW&quot;,
+ &quot;BBWBBWW&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 7</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;,
+ &quot;WWWWWWWWWW&quot;}
+</pre></td></tr></table></td></tr><tr><td><pre>Returns: 30</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
