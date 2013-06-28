@@ -1,0 +1,71 @@
+#include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <set>
+#include <map>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
+#include <cmath>
+using namespace std;
+
+vector<string> split( const string& s, const string& delim =" " ) {
+    vector<string> res;
+    string t;
+    for ( int i = 0 ; i != s.size() ; i++ ) {
+        if ( delim.find( s[i] ) != string::npos ) {
+            if ( !t.empty() ) {
+                res.push_back( t );
+                t = "";
+            }
+        } else {
+            t += s[i];
+        }
+    }
+    if ( !t.empty() ) {
+        res.push_back(t);
+    }
+    return res;
+}
+
+vector<int> splitInt( const string& s, const string& delim =" " ) {
+    vector<string> tok = split( s, delim );
+    vector<int> res;
+    for ( int i = 0 ; i != tok.size(); i++ )
+        res.push_back( atoi( tok[i].c_str() ) );
+    return res;
+}
+
+class PerfectPermutation {
+public:
+    bool vst[100];
+    int reorder(vector <int> P) {
+        memset(vst, 0, sizeof(vst));
+        int cnt = 0, n = P.size();
+        for (int i = 0; i < n; ++i)
+            if (!vst[i]) {
+                int x = i, now = 0;
+                do {
+                    vst[x] = 1;
+                    ++now;
+                    x = P[x];
+                } while (x != i);
+                ++cnt;
+            }
+        if (cnt > 1) return cnt;
+        else return 0;
+    }
+
+};
+
+
+// Powered by FileEdit
+// Powered by CodeProcessor
+
+
+// Powered by FileEdit
+// Powered by CodeProcessor
