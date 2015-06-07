@@ -1,0 +1,51 @@
+//a[sb[i]][j]存储j!%i的值，如果不多的话可以用预处理一个g[i]数组替换
+int gcd(int a,int b)
+{
+    if(b==0) return a;
+    return gcd(b, a % b);
+}
+void e_gcd(int a, int b, int &x, int &y) //扩展欧几里得定理：解ax+by==1。
+{
+    if(!b)
+    {
+        x = 1, y = 0;
+    }
+    else
+    {
+        e_gcd(b, a % b, x, y);
+        int l = x; x = y; y = l - a / b * y;
+    }
+}
+int choose(int n, int m)
+{
+    if(m > n) return 0;
+    else if(n == m) return 1;
+    int nn = a[sb[mod]][n], mm = (a[sb[mod]][m] * a[sb[mod]][n - m]) % mod;
+    int d = gcd(nn, mm);
+    nn /= d; mm /= d;
+    int x, y;
+    e_gcd(mm, mod, x, y);
+    x = (x + mod) % mod;
+    return (x * nn) % mod;
+}
+
+int cal(int n, int m)
+{
+    int i = 0;
+    while (n > 0)
+    {
+        e[i++] = n % mod;
+        n = n / mod;
+    }
+    int len = i;
+    i = 0;
+    while (m > 0)
+    {
+        f[i++] = m % mod;
+        m = m / mod;
+    }
+    int re = 1;
+    for(i = 0; i < len; i++)
+        re = (re * choose(e[i], f[i])) % mod;
+    return re;
+}

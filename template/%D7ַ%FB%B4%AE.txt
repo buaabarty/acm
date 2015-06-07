@@ -1,0 +1,60 @@
+一、用字符数组来存储字符串：
+char st1[100],st2[100] ; //字符数组说明
+cin>>st1>>st2;
+long a,b;
+输入：hello,  world
+则st1={‘h’,’e’,’l’,’l’,’o’,’,’,’\0’}
+st2={‘w’,’o’,’r’,’l’,’d’,’\0}
+字符’\0’为字符串结束标志
+1. 字符数组长度
+   strlen(st1); //如a=strlen(st1);b=strlen(st2); 则a=6,b=5
+2. 字符数组比较
+   不能直接比较，st1>st2是错误的，要用strcmp（）函数
+   strcmp(st1,st2); //st1=st2相等则输出0，st1<st2输出-1，st1>st2输出1
+   strncmp(st1,st2,n);   把st1,st2的前n个进行比较。
+3. 连接字符数组
+   不能直接用st1=st1+st2;用strcat()函数
+   strcat(st1,st2); //将st1和st2连接后赋给st1,本例连接后st1为”hello,world”
+   strncat(st1,st2,n);   n表示连接上st2的前n个给st1，在最后不要加'\0'。
+4. 替换
+   strcpy(st1,st2);  //用st2的值替换st1的值，字符数组不能如此赋值st1=st2或st1[]=st2[]都是错误的
+   本例中st1值被替代为”world”
+   strncpy(st1,st2,n); n表示复制st2的前n个给st1，在最后要加'\0'。
+5. 其他函数
+strchr(st1,ch) //ch为要找的字符。如strchr(st1,’e’);会截取出st1中以字母’e’开头的字符串，要用string类型的来存储，如string c1; c1=strchr(st1,’e’); 则c1为”ello”
+   strspn(st1,st2); //返回st1起始部分匹配st2中任意字符的字符数。本例中”hello,”中的第一个字符’h’不能在”world”中找到匹配字符，因此返回值为0。如st1=”rose”;st2=”worse”;则返回值为4，因为rose在worse中都能找到匹配字符。
+   strrev(); //颠倒字符串
+二、用字符串来存储字符串
+string str1,str2; cin>>str1>>str2; 
+//如输入“hello,  world”则str1=”hello,”  str2=”world”
+可直接赋值: str1=str2;
+1. 字符串长度
+   len = str1.length();
+2. 字符串比较
+   可以直接比较，即str1>str2;str1==str2;等
+3. 连接
+   可以直接连接，即str1 += str2;等
+4. 字符串提取
+   str2 = str1.substr(); //str2值被赋值为str1
+   str2 = str1.substr(pos1); //如str2=str1.substr(2);则str2=”llo”;
+   str2=str1.substr(pos1,len1); //提取指定位置指定长度的字符串,如str2=str1.substr(1,2) ;则str2=”el”
+5. 字符串搜索
+   where = str1.find(str2); //返回str2是在str1中的最先被找到的位置
+   where = str1.find(str2,pos1); pos1是从str1的第几位开始。
+   where = str1.rfind(str2); 从后往前搜。
+6. 插入字符串
+   不是赋值语句。
+   str1.insert(pos1,str2); //如str1.insert(2,str2)则str1=”heworldllo,”
+   str1.insert(pos1,str2,pos2,len2);
+   str1.insert(pos1,numchar,char); numchar是插入次数，char是要插入的字符。
+7. 替换字符串
+   str1.replace(pos1,str2);
+   str1.replace(pos1,str2,pos2,len2);
+8. 删除字符串
+   str.erase(pos,len)
+   str.clear();
+9. 交换字符串
+   swap(str1,str2);
+注意：1.要包含头文件#include<cstring>
+2.在有些场合下用字符数组char st1[100]比string st2还好用些，可根据具体情况作不同选择。
+3.在读入一个含有空格的字符串时用cin是不行的（cin读字符串或字符数组时，自动以空格或回车作为分格符）

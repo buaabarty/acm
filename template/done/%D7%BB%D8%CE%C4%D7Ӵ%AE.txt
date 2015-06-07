@@ -1,0 +1,29 @@
+int p[N];
+char temp[N];
+int Max_Palindrome(char s[N])
+{
+    int n = strlen(s), ans = 0, mx = 0, id = 0;
+    temp[0] = '$';
+    temp[1] = '#';
+    for (int i = 0; i < n; ++i)
+    {
+        temp[i * 2 + 2] = s[i];
+        temp[i * 2 + 3] = '#';
+    }
+    n = n * 2 + 2;
+    temp[n] = 0;
+    for(int i = 1; i < n; i++)
+    {
+        if(mx > i) p[i] = min(p[2 * id - i], p[id] + id - i);
+        else p[i] = 1;
+        for(; temp[i + p[i]] == temp[i - p[i]]; p[i]++);
+        if( p[i] + i > mx )
+        {
+            mx = p[i] + i;
+            id = i;
+        }
+    }
+    for (int i = 0; i < n; ++i)
+        ans = max(ans, p[i]);
+    return ans - 1;
+}
