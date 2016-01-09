@@ -64,6 +64,34 @@ struct snake {
 };
 
 template<class T>
+int simple_lcs(const myarray<T> &a, myarray<T> &b) {
+    int n = a.size();
+    int m = b.size();
+    int limd = n + m;
+    myarray<int> v(-n - m, n + m);
+    v[1] = 0;
+    for (int d = 0; d <= limd; ++d) {
+        for (int k = -d, x, y; k <= d; k += 2) {
+            if (k == -d || (k != d && v[k - 1] < v[k + 1])) {
+                x = v[k + 1];
+            } else {
+                x = v[k - 1] + 1;
+            }
+            y = x - k;
+            while (x < n && y < m && a[x + 1] == b[y + 1]) {
+                ++x;
+                ++y;
+            }
+            v[k] = x;
+            if (x >= n && y >= m) {
+                return (n + m - d) / 2;
+            }
+        }
+    }
+    return 0;
+}
+
+template<class T>
 snake middle_snake(const myarray<T> &a, const myarray<T> &b) {
     int n = a.size();
     int m = b.size();
@@ -126,6 +154,7 @@ void lcs(vector<pair<int, int> > *out,
     if (n && m) {
         snake s(middle_snake(a, b));
         if (s.d > 1) {
+            printf("%d %d %d %d\n", s.x, s.y, s.u, s.v);
             lcs(out, a.splice(1, s.x), aoff,
                      b.splice(1, s.y), boff);
             for (int i = s.x + 1; i <= s.u; ++i) {
@@ -168,6 +197,8 @@ int main() {
             cin >> buf;
         }
         myarray<string> a(1, va), b(1, vb);
+
+        cout << simple_lcs(a, b) << endl;
 
         vector<pair<int, int> > sol;
         lcs(&sol, a, 0, b, 0);
